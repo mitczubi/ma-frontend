@@ -1,6 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: #666;
+  background: #f6f6f6;
+}
+
 #root {
-  max-width: 1200px;
+  max-width: 80%;
   margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  padding: 1.5rem 2.5rem;
+  background-image: linear-gradient(to left, #30aeee 10%, #052330 90%);
+  margin: 0 0 2rem 0;
+  font-size: 1.5rem;
+  color: white;
+}
+
+img {
+  display: block;
+  margin: 1rem auto;
+  max-width: 100%
+}
+
+h2, p, table {
+  padding: 0 2.5rem 2.5rem
 }
 
 .container {
@@ -8,9 +40,29 @@
   flex-wrap: wrap;
 }
 
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .card {
   margin: 1rem;
   border: 1px solid gray;
+  background: white;
+  box-shadow: 2px 4px 25px rgba(0, 0, 0, .1);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all .2s linear;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.card:hover {
+  box-shadow: 2px 8px 45px rgba(0, 0, 0, 0.15);
+  transform: translate3D(0, -10px, 0);
+  cursor: pointer;
 }
 
 @media screen and (min-width: 600px) {
@@ -21,6 +73,6 @@
 
 @media screen and (min-width: 900px) {
   .card {
-    flex: 1 1 calc(33% - 2rem)
+    flex: 1 1 calc(100% - 2rem)
   }
 }
