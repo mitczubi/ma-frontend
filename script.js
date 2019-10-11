@@ -15,7 +15,10 @@ request.open('GET', 'https://api.mobilize.us/v1/events', true)
 
 request.onload = function() {
   //Where the json data is accessed
-  var data = JSON.parse(this.response)['data']
+  let data = JSON.parse(this.response)['data']
+  data = data.sort(function(a,b) {
+    return b.timeslots[0].start_date - a.timeslots[0].start_date
+  })
 
   if (request.status >= 200 && request.status < 400) {
     for (i = 0; i < data.length; i++) {
@@ -46,9 +49,8 @@ request.onload = function() {
 
 
       let start_date_utc = data[i]['timeslots'][0]['start_date']
-      let start_date = new Date(start_date_utc)
-      start_date.toLocaleDateString()
-      // start_date.setUTCSeconds(start_date_utc)
+      let start_date = new Date(0)
+      start_date.setUTCSeconds(start_date_utc)
       // start_date.toLocaleDateString()
 
       let time_table = document.createElement('table')
@@ -85,3 +87,15 @@ request.onload = function() {
 }
 
 request.send()
+
+function getLocation() {
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log(position.coords.latitude, position.coords.longitude)
+    })
+  } else {
+    console.log('geolocation not avaiable ')
+  }
+}
+
+getLocation()
