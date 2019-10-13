@@ -21,13 +21,12 @@ let request = new XMLHttpRequest();
 request.open('GET', 'https://api.mobilize.us/v1/events', true);
 
 request.onload = function() {
-  //Where the json data is accessed
-  let data = JSON.parse(this.response)['data'];
-  data = data.sort(function(a,b) {
-    return b.timeslots[0].start_date - a.timeslots[0].start_date
-  });
-
   if (request.status >= 200 && request.status < 400) {
+      //Where the json data is accessed
+    let data = JSON.parse(this.response)['data'];
+    data = data.sort(function(a,b) {
+      return b.timeslots[0].start_date - a.timeslots[0].start_date
+    });
     for (i = 0; i < data.length; i++) {
       const card = document.createElement('div');
       card.setAttribute('class', 'card');
@@ -86,9 +85,7 @@ request.onload = function() {
       inner_card_container.appendChild(time_table);
     }
   } else {
-   const errorMessage = document.createElement('marquee')
-   errorMessage.textContent = "Message not found!"
-   app.appendChild(errorMessage)
+    window.location.href = 'error_page.html'
   }
 
   const cards = document.querySelectorAll('.card')
